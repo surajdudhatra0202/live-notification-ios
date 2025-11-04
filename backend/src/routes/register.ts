@@ -7,6 +7,8 @@ const router = Router();
 router.post("/", async (req: Request, res: Response) => {
   const { token } = req.body;
 
+  console.log('token in backend', token )
+
   if (!token) {
     return res.status(400).json({ error: "token required" });
   }
