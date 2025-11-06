@@ -1,4 +1,4 @@
-package com.frontend
+package com.notification_ios
 
 import android.app.Application
 import com.facebook.react.PackageList

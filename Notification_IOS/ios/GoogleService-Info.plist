@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.notificationios</string>
+	<string>com.notificationiosdemo</string>
 	<key>PROJECT_ID</key>
 	<string>live-notification-708d8</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:667335037561:ios:9e895d8df14592ace7baa8</string>
+	<string>1:667335037561:ios:f92d33b1b29fe051e7baa8</string>
 </dict>
 </plist>

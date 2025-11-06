@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		3A5F5E752EBA0BAD00724182 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F5E742EBA0BAD00724182 /* GoogleService-Info.plist */; };
+		3A68427E2EBB68C1001D6908 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A68427D2EBB68C1001D6908 /* GoogleService-Info.plist */; };
 		6261DE4BF0A4D7F286D00C5B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -21,7 +21,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Notification_IOS/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = Notification_IOS/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		2223C00C71B37676358EB1F1 /* Pods-Notification_IOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notification_IOS.release.xcconfig"; path = "Target Support Files/Pods-Notification_IOS/Pods-Notification_IOS.release.xcconfig"; sourceTree = "<group>"; };
-		3A5F5E742EBA0BAD00724182 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3A68427D2EBB68C1001D6908 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3AC6B9DF2EB8BB0400CC1687 /* Notification_IOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Notification_IOS.entitlements; path = Notification_IOS/Notification_IOS.entitlements; sourceTree = "<group>"; };
 		42B30099BEAC9F5F6A0B0880 /* Pods_Notification_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notification_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Notification_IOS/AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,8 +45,8 @@
 		13B07FAE1A68108700A75B9A /* Notification_IOS */ = {
 			isa = PBXGroup;
 			children = (
-				3A5F5E742EBA0BAD00724182 /* GoogleService-Info.plist */,
 				3AC6B9DF2EB8BB0400CC1687 /* Notification_IOS.entitlements */,
+				3A68427D2EBB68C1001D6908 /* GoogleService-Info.plist */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -165,9 +165,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				3A5F5E752EBA0BAD00724182 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				6261DE4BF0A4D7F286D00C5B /* PrivacyInfo.xcprivacy in Resources */,
+				3A68427E2EBB68C1001D6908 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,10 +411,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -494,10 +491,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

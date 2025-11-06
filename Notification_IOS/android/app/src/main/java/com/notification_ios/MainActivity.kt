@@ -1,4 +1,4 @@
-package com.frontend
+package com.notification_ios
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
