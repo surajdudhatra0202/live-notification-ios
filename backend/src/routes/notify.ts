@@ -1,10 +1,10 @@
 import { Request, Response, Router } from "express";
-import sendNotification from "../services/fcmService";
+import { sendNotification } from "../services/fcmService";
 
 const router = Router();
 
 router.post("/", async (req: Request, res: Response) => {
-  const { token, title, body, totalCalls, completedCalls } = req.body;
+  const { token, title, body, totalCalls, completedCalls, platform } = req.body;
 
   if (!token || !title || !body || totalCalls === undefined || completedCalls === undefined) {
     return res
@@ -15,15 +15,16 @@ router.post("/", async (req: Request, res: Response) => {
   }
 
   try {
-    const response = await sendNotification(
+    const response = await sendNotification({
       token,
       title,
       body,
       totalCalls,
-      completedCalls
-    );
+      completedCalls,
+      platform
+    });
     res.json({ success: true, response });
-  } catch (err : any) {
+  } catch (err: any) {
     res.status(500).json({ success: false, error: err.message });
   }
 });

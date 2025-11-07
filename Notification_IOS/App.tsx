@@ -2,19 +2,41 @@ import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { registerDeviceToken } from './src/api/notificationApi';
 import HomeScreen from './src/screens/HomeScreen';
-import { createDefaultChannel, getFcmToken, requestUserPermission, setupForegroundHandler } from './src/services/notificationService';
+import { 
+  createDefaultChannel, 
+  getFcmToken, 
+  requestUserPermission, 
+  setupForegroundHandler,
+  setupNotificationInteractionHandler  // Add this
+} from './src/services/notificationService';
 
 
 export default function App() {
   useEffect(() => {
     async function init() {
-      await requestUserPermission();
-      await createDefaultChannel();
-      setupForegroundHandler();
+      try {
+        console.log('🚀 Initializing Notification setup...');
 
-      const token = await getFcmToken();
-      if (token) {
-        await registerDeviceToken(token);
+        const permissionGranted = await requestUserPermission();
+        if (!permissionGranted) {
+          console.warn('🔒 Notification permission denied');
+          return;
+        }
+
+        await createDefaultChannel();
+        setupForegroundHandler();
+        setupNotificationInteractionHandler(); // Add this line
+
+        const token = await getFcmToken();
+        if (token) {
+          const userId = 'USER_123';
+          await registerDeviceToken(token, userId);
+        } else {
+          console.warn('⚠️ No FCM token retrieved');
+        }
+
+      } catch (err) {
+        console.error('❌ Notification setup failed:', err);
       }
     }
 

@@ -5,20 +5,26 @@ const router = Router();
 
 // Register token
 router.post("/", async (req: Request, res: Response) => {
-  const { token } = req.body;
+  const { token, platform, deviceModel, appVersion, userId } = req.body;
 
-  console.log('token in backend', token )
+  console.log('token in backend', req.body)
 
-  if (!token) {
-    return res.status(400).json({ error: "token required" });
+  if (!token || !platform) {
+    return res.status(400).json({ error: "token and platform required" });
   }
 
   try {
-    let existing = await DeviceToken.findOne({ token });
-    if (!existing) {
-      await DeviceToken.create({ token });
-    }
+
+    const platformNormalized = platform.toLowerCase();
+
+    await DeviceToken.findOneAndUpdate(
+      { token },
+      { platform: platformNormalized, appVersion, deviceModel, userId, createdAt: new Date() },
+      { upsert: true, new: true }
+    )
+    console.log(`📱 Registered ${platform} device token`);
     res.json({ success: true, message: "Token registered successfully" });
+
   } catch (err) {
     console.error("Error saving token:", err);
     res.status(500).json({ success: false, error: "Server error" });
