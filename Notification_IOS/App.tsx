@@ -9,6 +9,8 @@ import {
   setupForegroundHandler,
   setupNotificationInteractionHandler  // Add this
 } from './src/services/notificationService';
+import { NavigationContainer } from '@react-navigation/native';
+import Tabs from './src/tab';
 
 
 export default function App() {
@@ -45,7 +47,9 @@ export default function App() {
 
   return (
     <SafeAreaProvider style={{ flex: 1 }}>
-      <HomeScreen />
+      <NavigationContainer>
+        <Tabs />
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }
