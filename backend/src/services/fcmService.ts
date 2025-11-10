@@ -1,7 +1,7 @@
-import admin, { messaging } from "firebase-admin";
-import path from "path";
+import admin, { messaging } from 'firebase-admin';
+import path from 'path';
 
-const serviceAccount = require(path.join(__dirname, "../config/firebase-key.json"));
+const serviceAccount = require(path.join(__dirname, '../config/firebase-key.json'));
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -32,35 +32,47 @@ export async function sendNotification({
       body,
       totalCalls: String(totalCalls),
       completedCalls: String(completedCalls),
-      type: 'live-update',
     };
 
     let message: messaging.Message;
 
     if (platform === 'android') {
-      // CRITICAL: Data-only message for Android
-      // This prevents the system from auto-displaying notifications
+      // Android: use "notification" payload so system displays automatically in background
       message = {
         token,
-        data, // Only data, no notification payload
+        notification: {
+          title,
+          body: `${completedCalls} of ${totalCalls} calls completed`,
+        },
+        data,
         android: {
           priority: 'high',
-          // No notification object here!
+          notification: {
+            channelId: 'default',
+            sound: 'default',
+          },
         },
       };
-    } else if (platform === "ios") {
-      // iOS: Keep data-only for silent updates
+    } else if (platform === 'ios') {
+      // iOS: visible alert notification
       message = {
         token,
+        notification: {
+          title,
+          body: `${completedCalls} of ${totalCalls} calls completed`,
+        },
         data,
         apns: {
           headers: {
             'apns-priority': '10',
-            'apns-collapse-id': 'live-update',
           },
           payload: {
             aps: {
-              contentAvailable: true,
+              alert: {
+                title,
+                body: `${completedCalls} of ${totalCalls} calls completed`,
+              },
+              sound: 'default',
             },
           },
         },
