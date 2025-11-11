@@ -4,13 +4,13 @@ import { sendNotification } from "../services/fcmService";
 const router = Router();
 
 router.post("/", async (req: Request, res: Response) => {
-  const { token, title, body, totalCalls, completedCalls, platform } = req.body;
+  const { token, title, body, totalCalls, completedCalls, platform, screen, userId } = req.body;
 
-  if (!token || !title || !body || totalCalls === undefined || completedCalls === undefined) {
+  if (!token || !title || !body || totalCalls === undefined || completedCalls === undefined || !screen || !userId) {
     return res
       .status(400)
       .json({
-        error: "token, title, body, totalcalls, completedcalls required",
+        error: "token, title, body, totalcalls, completedcalls, screen, userid required",
       });
   }
 
@@ -21,7 +21,9 @@ router.post("/", async (req: Request, res: Response) => {
       body,
       totalCalls,
       completedCalls,
-      platform
+      platform,
+      screen,
+      userId
     });
     res.json({ success: true, response });
   } catch (err: any) {

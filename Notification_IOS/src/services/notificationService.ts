@@ -1,6 +1,7 @@
 import messaging from '@react-native-firebase/messaging';
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import { Platform, PermissionsAndroid } from 'react-native';
+import { navigate } from '../navigation/navigationRef';
 
 // Ask for permissions
 export async function requestUserPermission() {
@@ -42,10 +43,11 @@ export async function createDefaultChannel() {
 }
 
 // Display a simple notification
-export async function displayNotification(title?: string, body?: string) {
+export async function displayNotification(title?: string, body?: string, data?: any) {
   await notifee.displayNotification({
     title: title || 'Notification',
     body: body || '',
+    data: data,
     android: {
       channelId: 'default',
       importance: AndroidImportance.HIGH,
@@ -71,7 +73,7 @@ export function setupForegroundHandler() {
         ? `${completedCalls} of ${totalCalls} calls completed`
         : '');
 
-    await displayNotification(title, displayBody);
+    await displayNotification(title, displayBody, remoteMessage.data);
   });
 
   return unsubscribe;
@@ -82,12 +84,37 @@ export function setupNotificationInteractionHandler() {
   notifee.onBackgroundEvent(async ({ type, detail }) => {
     if (type === EventType.PRESS) {
       console.log('📲 Notification pressed in background:', detail);
+
+      if (detail.notification?.data?.screen) {
+        navigate(detail.notification.data.screen as string);
+      }
     }
   });
 
   notifee.onForegroundEvent(({ type, detail }) => {
     if (type === EventType.PRESS) {
       console.log('📲 Notification pressed in foreground:', detail);
+
+      if (detail.notification?.data?.screen) {
+        navigate(detail.notification.data.screen as string);
+      }
     }
   });
 }
+
+export function notificationOpened() {
+
+  messaging().onNotificationOpenedApp(remoteMessage => {
+    if (remoteMessage?.data?.screen) {
+      navigate(remoteMessage?.data?.screen);
+    }
+    console.log('remote notification data 1', remoteMessage);
+  });
+
+  messaging().getInitialNotification().then(remoteMessage => {
+    if (remoteMessage?.data?.screen) {
+      navigate(remoteMessage?.data?.screen);
+    }
+    console.log('remote notification data 2', remoteMessage);
+  })
+};

@@ -1,19 +1,23 @@
 import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { registerDeviceToken } from './src/api/notificationApi';
-import HomeScreen from './src/screens/HomeScreen';
 import { 
   createDefaultChannel, 
   getFcmToken, 
+  notificationOpened, 
   requestUserPermission, 
-  setupForegroundHandler,
+
+  setupForegroundHandler, 
+
   setupNotificationInteractionHandler  // Add this
 } from './src/services/notificationService';
 import { NavigationContainer } from '@react-navigation/native';
 import Tabs from './src/tab';
+import { navigationRef } from './src/navigation/navigationRef';
 
 
 export default function App() {
+
   useEffect(() => {
     async function init() {
       try {
@@ -37,17 +41,18 @@ export default function App() {
           console.warn('⚠️ No FCM token retrieved');
         }
 
+        notificationOpened();
+
       } catch (err) {
         console.error('❌ Notification setup failed:', err);
       }
     }
-
     init();
   }, []);
 
   return (
     <SafeAreaProvider style={{ flex: 1 }}>
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef} >
         <Tabs />
       </NavigationContainer>
     </SafeAreaProvider>

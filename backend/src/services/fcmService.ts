@@ -16,6 +16,8 @@ interface NotificationPayload {
   totalCalls: string;
   completedCalls: string;
   platform: 'android' | 'ios';
+  screen: string,
+  userId: string,
 }
 
 export async function sendNotification({
@@ -24,7 +26,9 @@ export async function sendNotification({
   body,
   totalCalls,
   completedCalls,
-  platform
+  platform,
+  screen,
+  userId
 }: NotificationPayload) {
   try {
     const data = {
@@ -32,6 +36,8 @@ export async function sendNotification({
       body,
       totalCalls: String(totalCalls),
       completedCalls: String(completedCalls),
+      screen,
+      userId,
     };
 
     let message: messaging.Message;
@@ -59,7 +65,7 @@ export async function sendNotification({
         token,
         notification: {
           title,
-          body: `${completedCalls} of ${totalCalls} calls completed`,
+          body: `${completedCalls} of ${totalCalls} calls completed and ${screen}-${userId}`,
         },
         data,
         apns: {

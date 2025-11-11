@@ -10,7 +10,7 @@ const SettingScreen = () => {
 
             <SafeAreaView style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.text}>Call Screen</Text>
+                    <Text style={styles.text}>Setting Screen</Text>
                     <Text style={styles.text}><Ionicons name='settings' size={23} color={'#d9d9d9ff'} /></Text>
                 </View>
             </SafeAreaView>
