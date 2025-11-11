@@ -34,7 +34,7 @@ router.post("/", async (req: Request, res: Response) => {
 // Get all tokens (for testing / broadcast)
 router.get("/", async (_req: Request, res: Response) => {
   try {
-    const tokens = await DeviceToken.find().select("token -_id");
+    const tokens = await DeviceToken.find()
     res.json({ success: true, tokens });
   } catch (err) {
     res.status(500).json({ success: false, error: "Server error" });
