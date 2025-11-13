@@ -13,6 +13,8 @@
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A06DAD10CA84CF7AE60D57FF /* Pods_Notification_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B30099BEAC9F5F6A0B0880 /* Pods_Notification_IOS.framework */; };
+		C974D5296A474E889A681F81 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30643FED801047718240EEB8 /* BootSplash.storyboard */; };
+		A82A9E5760F54FD88F31260A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD8DE8C35A17460FB5FBDAEB /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Notification_IOS/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C05E7712E85C5AE18D71ED3D /* Pods-Notification_IOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notification_IOS.debug.xcconfig"; path = "Target Support Files/Pods-Notification_IOS/Pods-Notification_IOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		30643FED801047718240EEB8 /* BootSplash.storyboard */ = {isa = PBXFileReference; name = "BootSplash.storyboard"; path = "Notification_IOS/BootSplash.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FD8DE8C35A17460FB5FBDAEB /* Colors.xcassets */ = {isa = PBXFileReference; name = "Colors.xcassets"; path = "Notification_IOS/Colors.xcassets"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = folder.assetcatalog; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				30643FED801047718240EEB8 /* BootSplash.storyboard */,
+				FD8DE8C35A17460FB5FBDAEB /* Colors.xcassets */,
 			);
 			name = Notification_IOS;
 			sourceTree = "<group>";
@@ -168,6 +174,8 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				6261DE4BF0A4D7F286D00C5B /* PrivacyInfo.xcprivacy in Resources */,
 				3A68427E2EBB68C1001D6908 /* GoogleService-Info.plist in Resources */,
+				C974D5296A474E889A681F81 /* BootSplash.storyboard in Resources */,
+				A82A9E5760F54FD88F31260A /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

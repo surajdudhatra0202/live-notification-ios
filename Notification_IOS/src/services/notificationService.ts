@@ -24,10 +24,14 @@ export async function requestUserPermission() {
 
 // Get FCM token
 export async function getFcmToken(): Promise<string | null> {
-  if (Platform.OS === 'ios') await messaging().registerDeviceForRemoteMessages();
-  const token = await messaging().getToken();
-  console.log('📱 FCM Token:', token);
-  return token;
+  try {
+    const token = await messaging().getToken();
+    console.log('📱 FCM Token:', token);
+    return token;
+  } catch (error) {
+    console.error('Error getting FCM token:', error);
+    return null;
+  }
 }
 
 // Create default notification channel
@@ -66,14 +70,8 @@ export function setupForegroundHandler() {
   const unsubscribe = messaging().onMessage(async remoteMessage => {
     console.log('📩 Foreground message:', remoteMessage);
 
-    const { title, body, totalCalls, completedCalls } = remoteMessage.data || {};
-    const displayBody =
-      body ||
-      (completedCalls && totalCalls
-        ? `${completedCalls} of ${totalCalls} calls completed`
-        : '');
-
-    await displayNotification(title, displayBody, remoteMessage.data);
+    const { title, body } = remoteMessage.data || {};
+    await displayNotification(title, body, remoteMessage.data);
   });
 
   return unsubscribe;
@@ -82,39 +80,41 @@ export function setupForegroundHandler() {
 // Handle notification taps
 export function setupNotificationInteractionHandler() {
   notifee.onBackgroundEvent(async ({ type, detail }) => {
-    if (type === EventType.PRESS) {
-      console.log('📲 Notification pressed in background:', detail);
-
-      if (detail.notification?.data?.screen) {
-        navigate(detail.notification.data.screen as string);
-      }
+    if (type === EventType.PRESS && detail.notification?.data?.screen) {
+      console.log('📲 Background notification tap:', detail.notification.data.screen);
+      navigate(detail.notification.data.screen as string, detail.notification.data);
     }
   });
 
   notifee.onForegroundEvent(({ type, detail }) => {
-    if (type === EventType.PRESS) {
-      console.log('📲 Notification pressed in foreground:', detail);
-
-      if (detail.notification?.data?.screen) {
-        navigate(detail.notification.data.screen as string);
-      }
+    if (type === EventType.PRESS && detail.notification?.data?.screen) {
+      console.log('📲 Foreground notification tap:', detail.notification.data.screen);
+      navigate(detail.notification.data.screen as string, detail.notification.data);
     }
   });
 }
 
-export function notificationOpened() {
+export async function checkInitialNotification(): Promise<{ screen?: string, params?: any } | null> {
+  try {
+    const remoteMessage = await messaging().getInitialNotification();
+    if (remoteMessage?.data?.screen) {
+      console.log('📱 Initial notification found:', remoteMessage.data.screen);
+      return {
+        screen: remoteMessage.data.screen as string,
+        params: remoteMessage.data
+      }
+    }
+  } catch (error) {
+    console.error("Error checking initial notification", error)
+  }
+  return null
+}
 
+export function notificationOpened() {
   messaging().onNotificationOpenedApp(remoteMessage => {
     if (remoteMessage?.data?.screen) {
       navigate(remoteMessage?.data?.screen);
     }
     console.log('remote notification data 1', remoteMessage);
   });
-
-  messaging().getInitialNotification().then(remoteMessage => {
-    if (remoteMessage?.data?.screen) {
-      navigate(remoteMessage?.data?.screen);
-    }
-    console.log('remote notification data 2', remoteMessage);
-  })
 };
